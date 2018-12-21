@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BooleanHub</string>
+    <string name="answerfromservererror">Ошибка! Не удалось получить ответ от сервера.</string>
+    <string name="listempty">Список пуст</string>
 </resources>
