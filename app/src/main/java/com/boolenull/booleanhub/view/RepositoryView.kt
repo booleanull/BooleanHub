@@ -8,11 +8,19 @@ import com.boolenull.booleanhub.model.RepositoryModel
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface RepositoryView : MvpView {
+
+    fun setRepositoryList(mutableList : MutableList<RepositoryModel>)
+
+    fun setRepositorySearch(text: String)
+
     fun showProgress()
+
     fun endProgress()
+
     @StateStrategyType(SkipStrategy::class)
     fun showError(rid : Int)
-    fun setRepositoryList(mutableList : MutableList<RepositoryModel>)
+
     fun showEmpty()
+
     fun hideEmpty()
 }

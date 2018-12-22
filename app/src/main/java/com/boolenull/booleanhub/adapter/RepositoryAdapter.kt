@@ -11,10 +11,28 @@ import kotlinx.android.synthetic.main.layout_repository.view.*
 class RepositoryAdapter() : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
     private var repositoryList = mutableListOf<RepositoryModel>()
+    private var searchList = mutableListOf<RepositoryModel>()
 
     fun updateRepositoryList(list: MutableList<RepositoryModel>) {
         repositoryList.clear()
+        searchList.clear()
+
         repositoryList.addAll(list)
+        searchList.addAll(list)
+
+        notifyDataSetChanged()
+    }
+
+    fun filter(text: String) {
+        searchList.clear()
+        if(text.isEmpty())
+            searchList.addAll(repositoryList)
+        else
+            repositoryList.forEach {
+                if(it.date.contains(text, true) || it.dateUpdate.contains(text, true) || it.language.contains(text, true) || it.title.contains(text, true)){
+                    searchList.add(it)
+                }
+            }
         notifyDataSetChanged()
     }
 
@@ -24,9 +42,9 @@ class RepositoryAdapter() : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>()
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = repositoryList.size
+    override fun getItemCount(): Int = searchList.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(repositoryList[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(searchList[holder.adapterPosition])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: RepositoryModel) {

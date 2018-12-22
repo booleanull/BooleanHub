@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    android:background="@color/colorGrayLight">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        tools:listitem="@layout/layout_repository" />
-
+        tools:listitem="@layout/layout_repository"/>
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"

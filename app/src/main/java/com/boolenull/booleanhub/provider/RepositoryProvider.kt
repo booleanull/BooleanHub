@@ -18,8 +18,8 @@ class RepositoryProvider(val presentor: RepositoryPresenter) {
                 repositoryList.add(RepositoryModel("assdfadasdas", "dasdassaddasda", "20.10.1000", "30.12.2012"))
                 repositoryList.add(RepositoryModel("asdasddasdas", "dasdasdasdsada", "20.10.1000", "30.12.2012"))
             }
-            presentor.errorLoadOrUpdateRepository(R.string.answerfromservererror)
-            //presentor.finishLoadOrUpdateRepository(repositoryList)
+            //presentor.errorLoadOrUpdateRepository(R.string.answerfromservererror)
+            presentor.finishLoadOrUpdateRepository(repositoryList)
         }, 2000)
     }
 }
