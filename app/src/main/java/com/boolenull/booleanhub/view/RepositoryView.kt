@@ -13,7 +13,7 @@ interface RepositoryView : MvpView {
 
     fun setRepositorySearch(text: String)
 
-    fun showProgress()
+    fun showProgress(isRefresh : Boolean)
 
     fun endProgress()
 

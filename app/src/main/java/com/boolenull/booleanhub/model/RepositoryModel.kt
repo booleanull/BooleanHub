@@ -1,3 +1,9 @@
 package com.boolenull.booleanhub.model
 
-class RepositoryModel(val title : String, val language : String, val date : String, val dateUpdate : String)
+import com.google.gson.annotations.SerializedName
+
+data class RepositoryModel(
+    @SerializedName("name") val title : String,
+    @SerializedName("language") val language : String,
+    @SerializedName("created_at") val date : String,
+    @SerializedName("updated_at") val dateUpdate : String)

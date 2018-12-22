@@ -2,9 +2,8 @@ package com.boolenull.booleanhub.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.boolenull.booleanhub.R
 import com.boolenull.booleanhub.model.RepositoryModel
-import com.boolenull.booleanhub.provider.RepositoryProvider
+import com.boolenull.booleanhub.data.RepositoryProvider
 import com.boolenull.booleanhub.view.RepositoryView
 
 
@@ -12,18 +11,20 @@ import com.boolenull.booleanhub.view.RepositoryView
 class RepositoryPresenter : MvpPresenter<RepositoryView>() {
 
     init {
-        startLoadOrUpdateRepository()
+        startLoadOrUpdateRepository(false)
     }
 
-    fun startLoadOrUpdateRepository() {
-        viewState.showProgress()
-        RepositoryProvider(this).testLoadRepository(true)
+    fun startLoadOrUpdateRepository(isRefresh : Boolean) {
+        viewState.showProgress(isRefresh)
+        RepositoryProvider(this).loadRepository()
     }
 
     fun errorLoadOrUpdateRepository(rid: Int) {
+        val mutableList = mutableListOf<RepositoryModel>()
         viewState.endProgress()
         viewState.showError(rid)
         viewState.showEmpty()
+        viewState.setRepositoryList(mutableList)
     }
 
     fun finishLoadOrUpdateRepository(mutableList: MutableList<RepositoryModel>) {

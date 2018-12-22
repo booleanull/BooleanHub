@@ -1,11 +1,13 @@
 package com.boolenull.booleanhub.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.SearchView
+import android.text.TextUtils
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -17,20 +19,17 @@ import com.boolenull.booleanhub.presenter.RepositoryPresenter
 import com.boolenull.booleanhub.utils.SpacesItemDecoration
 import com.boolenull.booleanhub.view.RepositoryView
 import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v4.view.MenuItemCompat
-import android.text.TextUtils
-import android.view.MenuItem
 
 
-class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryTextListener {
+class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
 
     @InjectPresenter
     lateinit var repositoryPresenter: RepositoryPresenter
 
     lateinit var repositoryAdapter: RepositoryAdapter
-    lateinit var searchView : SearchView
-    lateinit var menuItem : MenuItem
-    var searchString : String = ""
+    lateinit var searchView: SearchView
+    lateinit var menuItem: MenuItem
+    var searchString: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +40,8 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
         recyclerView.layoutManager = LinearLayoutManager(applicationContext, OrientationHelper.VERTICAL, false)
         recyclerView.addItemDecoration(SpacesItemDecoration(this, 8))
         recyclerView.setHasFixedSize(true)
+
+        swipeRefreshLayout.setOnRefreshListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,28 +68,36 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
         return true
     }
 
+    override fun onRefresh() {
+        repositoryPresenter.startLoadOrUpdateRepository(true)
+    }
+
     override fun setRepositorySearch(text: String) {
         searchString = text
 
         repositoryAdapter.filter(text)
-        if(repositoryAdapter.itemCount == 0) {
+        if (repositoryAdapter.itemCount == 0) {
             showEmpty()
-        }
-        else {
+        } else {
             hideEmpty()
         }
     }
 
     override fun setRepositoryList(mutableList: MutableList<RepositoryModel>) {
         repositoryAdapter.updateRepositoryList(mutableList)
+        repositoryPresenter.viewState.setRepositorySearch(searchString)
     }
 
-    override fun showProgress() {
-        progressBar.visibility = View.VISIBLE
+    override fun showProgress(isRefresh: Boolean) {
+        if (!isRefresh)
+            progressBar.visibility = View.VISIBLE
+        else
+            swipeRefreshLayout.isRefreshing = true
     }
 
     override fun endProgress() {
         progressBar.visibility = View.GONE
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun showError(rid: Int) {
