@@ -5,8 +5,7 @@ import com.boolenull.booleanhub.MyApplication
 import com.boolenull.booleanhub.R
 import com.boolenull.booleanhub.model.RepositoryModel
 import com.boolenull.booleanhub.presenter.RepositoryPresenter
-import io.reactivex.Completable
-import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -27,34 +26,36 @@ class RepositoryProvider(val presentor: RepositoryPresenter) {
     }
 
     private fun handleResponse(list: List<RepositoryModel>) {
+        var count = 1
         list.forEach {
+            it.id = count++
             repositoryList.add(it)
         }
 
-        Completable.fromAction {
-            Log.d("AAAAAA", "dsadas")
-            MyApplication.database.beginTransaction()
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(Observable.fromCallable {
+            MyApplication.database.repositoryDao().deleteAll()
             MyApplication.database.repositoryDao().insert(repositoryList)
-            MyApplication.database.endTransaction()
         }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe()
+        )
 
         presentor.finishLoadOrUpdateRepository(repositoryList)
     }
 
     private fun handleError(error: Throwable) {
-
-        Completable.fromAction {
-            MyApplication.database.beginTransaction()
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(Observable.fromCallable {
             repositoryList = MyApplication.database.repositoryDao().all().toMutableList()
-            MyApplication.database.endTransaction()
         }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe()
-
-        presentor.errorLoadOrUpdateRepository(repositoryList, R.string.answerfromservererror)
+            .subscribe {
+                repositoryList.reversed()
+                presentor.errorLoadOrUpdateRepository(repositoryList, R.string.answerfromservererror)
+            }
+        )
     }
 }

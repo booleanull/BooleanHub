@@ -12,20 +12,17 @@ import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.boolenull.booleanhub.MyApplication
 import com.boolenull.booleanhub.R
 import com.boolenull.booleanhub.adapter.RepositoryAdapter
 import com.boolenull.booleanhub.model.RepositoryModel
 import com.boolenull.booleanhub.presenter.RepositoryPresenter
 import com.boolenull.booleanhub.utils.SpacesItemDecoration
 import com.boolenull.booleanhub.view.RepositoryView
-import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
+class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryTextListener,
+    SwipeRefreshLayout.OnRefreshListener {
 
     @InjectPresenter
     lateinit var repositoryPresenter: RepositoryPresenter
