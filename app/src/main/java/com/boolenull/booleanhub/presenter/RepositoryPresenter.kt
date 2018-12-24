@@ -21,9 +21,9 @@ class RepositoryPresenter : MvpPresenter<RepositoryView>() {
 
     fun errorLoadOrUpdateRepository(mutableList: MutableList<RepositoryModel>, rid: Int) {
         viewState.endProgress()
-        viewState.showError(rid)
         viewState.showEmpty()
         viewState.setRepositoryList(mutableList)
+        viewState.showError(rid)
     }
 
     fun finishLoadOrUpdateRepository(mutableList: MutableList<RepositoryModel>) {

@@ -1,5 +1,7 @@
 package com.boolenull.booleanhub.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ class RepositoryAdapter() : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>()
 
     private var repositoryList = mutableListOf<RepositoryModel>()
     private var searchList = mutableListOf<RepositoryModel>()
+    private lateinit var inflater : LayoutInflater
 
     fun updateRepositoryList(list: MutableList<RepositoryModel>) {
         repositoryList.clear()
@@ -37,7 +40,7 @@ class RepositoryAdapter() : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
+        inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.layout_repository, parent, false)
         return ViewHolder(view)
     }
@@ -53,6 +56,11 @@ class RepositoryAdapter() : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>()
                 tvLanguage.text = item.language
                 tvDate.text = item.date
                 tvDateUpdate.text = item.dateUpdate
+                layout.setOnClickListener {
+                    val uriUrl = Uri.parse(item.link)
+                    val intent = Intent(Intent.ACTION_VIEW, uriUrl)
+                    inflater.context.startActivity(intent)
+                }
             }
         }
     }

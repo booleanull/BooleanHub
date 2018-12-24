@@ -39,7 +39,7 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
         repositoryAdapter = RepositoryAdapter()
         recyclerView.adapter = repositoryAdapter
         recyclerView.layoutManager = LinearLayoutManager(applicationContext, OrientationHelper.VERTICAL, false)
-        recyclerView.addItemDecoration(SpacesItemDecoration(this, 8))
+        //recyclerView.addItemDecoration(SpacesItemDecoration(this, 8))
         recyclerView.setHasFixedSize(true)
 
         swipeRefreshLayout.setOnRefreshListener(this)
@@ -87,21 +87,28 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
     override fun setRepositoryList(mutableList: MutableList<RepositoryModel>) {
         repositoryAdapter.updateRepositoryList(mutableList)
         repositoryPresenter.viewState.setRepositorySearch(searchString)
+        tvOnline.visibility = View.VISIBLE
+        tvOffline.visibility = View.GONE
     }
 
     override fun showProgress(isRefresh: Boolean) {
-        if (!isRefresh)
+        if (!isRefresh) {
             progressBar.visibility = View.VISIBLE
+            layout.visibility = View.GONE
+        }
         else
             swipeRefreshLayout.isRefreshing = true
     }
 
     override fun endProgress() {
+        layout.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = false
     }
 
     override fun showError(rid: Int) {
+        tvOnline.visibility = View.GONE
+        tvOffline.visibility = View.VISIBLE
         Toast.makeText(this, getString(rid), Toast.LENGTH_LONG).show()
     }
 

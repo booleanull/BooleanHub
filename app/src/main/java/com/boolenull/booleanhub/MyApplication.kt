@@ -11,9 +11,11 @@ class MyApplication : Application() {
         super.onCreate()
         database = Room.databaseBuilder(this, RepositoryDatabase::class.java, "repository")
             .build()
+        context = this
     }
 
     companion object {
         lateinit var database: RepositoryDatabase
+        lateinit var context: Context
     }
 }
