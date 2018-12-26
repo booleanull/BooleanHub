@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BooleanHub</string>
+    <string name="answerfromservererror">Ошибка! Не удалось получить ответ от сервера.</string>
+    <string name="listempty">Список пуст</string>
+    <string name="Search">Search</string>
+    <string name="createdate">Дата создания: </string>
+    <string name="updatedate">Последнее обновление: </string>
+    <string name="today">Коммитов сегодня:</string>
+    <string name="yesterday">Коммитов вчера:</string>
+    <string name="nointernet">Отсутствует подключение!</string>
+</resources>
