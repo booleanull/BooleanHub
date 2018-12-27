@@ -92,6 +92,11 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
         tvOffline.visibility = View.GONE
     }
 
+    override fun setCommitCounts(today: Int, yesterday: Int) {
+        tvToday.text = getString(R.string.today) + " " + today.toString()
+        tvYesterday.text = getString(R.string.yesterday) + " " + yesterday.toString()
+    }
+
     override fun showProgress(isRefresh: Boolean) {
         if (!isRefresh) {
             progressBar.visibility = View.VISIBLE

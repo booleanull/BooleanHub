@@ -1,6 +1,7 @@
 package com.boolenull.booleanhub.data
 
 import com.boolenull.booleanhub.model.RepositoryModel
+import com.boolenull.booleanhub.model.UserModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -13,4 +14,7 @@ interface ApiService {
 
     @GET("users/booleanull/repos")
     fun getRepositories(): io.reactivex.Observable<List<RepositoryModel>>
+
+    @GET("users/booleanull/events")
+    fun getUserCommits() : io.reactivex.Observable<List<UserModel>>
 }
