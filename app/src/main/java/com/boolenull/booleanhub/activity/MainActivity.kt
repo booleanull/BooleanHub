@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.boolenull.booleanhub.MyApplication
 import com.boolenull.booleanhub.R
 import com.boolenull.booleanhub.adapter.RepositoryAdapter
 import com.boolenull.booleanhub.model.RepositoryModel

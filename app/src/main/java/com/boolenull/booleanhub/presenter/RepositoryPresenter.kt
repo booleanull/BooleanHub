@@ -2,6 +2,7 @@ package com.boolenull.booleanhub.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.boolenull.booleanhub.MyApplication
 import com.boolenull.booleanhub.data.RepositoryProvider
 import com.boolenull.booleanhub.model.RepositoryModel
 import com.boolenull.booleanhub.view.RepositoryView

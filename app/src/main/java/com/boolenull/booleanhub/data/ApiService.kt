@@ -13,18 +13,4 @@ interface ApiService {
 
     @GET("users/booleanull/repos")
     fun getRepositories(): io.reactivex.Observable<List<RepositoryModel>>
-
-    companion object Factory {
-        fun create(): ApiService {
-            val gson: Gson = GsonBuilder().setLenient().create()
-            val retrofit = Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl("https://api.github.com/")
-                .build();
-            return retrofit.create(ApiService::class.java)
-
-        }
-    }
-
 }

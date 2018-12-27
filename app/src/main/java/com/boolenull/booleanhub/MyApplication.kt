@@ -1,21 +1,21 @@
 package com.boolenull.booleanhub
 
 import android.app.Application
-import android.arch.persistence.room.Room
-import android.content.Context
-import com.boolenull.booleanhub.data.RepositoryDatabase
+import com.boolenull.booleanhub.di.*
 
 class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        database = Room.databaseBuilder(this, RepositoryDatabase::class.java, "repository")
+
+        providerComponent = DaggerProviderComponent.builder()
+            .applicationModule(ApplicationModule(this))
+            .networkModule(NetworkModule())
+            .databaseModule(DatabaseModule())
             .build()
-        context = this
     }
 
     companion object {
-        lateinit var database: RepositoryDatabase
-        lateinit var context: Context
+        lateinit var providerComponent: ProviderComponent
     }
 }
