@@ -12,18 +12,16 @@ import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.boolenull.booleanhub.MyApplication
 import com.boolenull.booleanhub.R
 import com.boolenull.booleanhub.adapter.RepositoryAdapter
 import com.boolenull.booleanhub.model.RepositoryModel
 import com.boolenull.booleanhub.presenter.RepositoryPresenter
-import com.boolenull.booleanhub.utils.SpacesItemDecoration
 import com.boolenull.booleanhub.view.RepositoryView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryTextListener,
-    SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener {
 
     @InjectPresenter
     lateinit var repositoryPresenter: RepositoryPresenter
@@ -88,21 +86,14 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
     override fun setRepositoryList(mutableList: MutableList<RepositoryModel>) {
         repositoryAdapter.updateRepositoryList(mutableList)
         repositoryPresenter.viewState.setRepositorySearch(searchString)
-        tvOnline.visibility = View.VISIBLE
-        tvOffline.visibility = View.GONE
-    }
-
-    override fun setCommitCounts(today: Int, yesterday: Int) {
-        tvToday.text = getString(R.string.today) + " " + today.toString()
-        tvYesterday.text = getString(R.string.yesterday) + " " + yesterday.toString()
+        tvProfile.text = getString(R.string.booleanull)
     }
 
     override fun showProgress(isRefresh: Boolean) {
         if (!isRefresh) {
             progressBar.visibility = View.VISIBLE
             layout.visibility = View.GONE
-        }
-        else
+        } else
             swipeRefreshLayout.isRefreshing = true
     }
 
@@ -113,8 +104,7 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
     }
 
     override fun showError(rid: Int) {
-        tvOnline.visibility = View.GONE
-        tvOffline.visibility = View.VISIBLE
+        tvProfile.text = getString(R.string.nointernet)
         Toast.makeText(this, getString(rid), Toast.LENGTH_LONG).show()
     }
 

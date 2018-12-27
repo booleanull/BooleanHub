@@ -26,8 +26,7 @@ class RepositoryPresenter : MvpPresenter<RepositoryView>() {
         viewState.showError(rid)
     }
 
-    fun finishLoadOrUpdateRepository(mutableList: MutableList<RepositoryModel>, todayCount: Int, yesterdayCount: Int) {
-        viewState.setCommitCounts(todayCount, yesterdayCount)
+    fun finishLoadOrUpdateRepository(mutableList: MutableList<RepositoryModel>) {
         viewState.endProgress()
         if (mutableList.isEmpty()) {
             viewState.showEmpty()

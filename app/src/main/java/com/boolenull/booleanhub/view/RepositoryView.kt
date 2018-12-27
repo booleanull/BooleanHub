@@ -11,8 +11,6 @@ interface RepositoryView : MvpView {
 
     fun setRepositoryList(mutableList : MutableList<RepositoryModel>)
 
-    fun setCommitCounts(today: Int, yesterday: Int)
-
     fun setRepositorySearch(text: String)
 
     fun showProgress(isRefresh : Boolean)

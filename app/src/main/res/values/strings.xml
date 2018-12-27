@@ -8,4 +8,5 @@
     <string name="today">Коммитов сегодня:</string>
     <string name="yesterday">Коммитов вчера:</string>
     <string name="nointernet">Отсутствует подключение!</string>
+    <string name="booleanull">BooleaNull</string>
 </resources>

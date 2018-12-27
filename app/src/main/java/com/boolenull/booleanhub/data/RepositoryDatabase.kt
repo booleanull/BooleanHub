@@ -5,7 +5,7 @@ import android.arch.persistence.room.Database
 import com.boolenull.booleanhub.model.RepositoryModel
 
 
-@Database(entities = arrayOf(RepositoryModel::class), version = 2)
+@Database(entities = arrayOf(RepositoryModel::class), version = 2, exportSchema = false)
 abstract class RepositoryDatabase : RoomDatabase() {
     abstract fun repositoryDao(): RepositoryDao
 }
