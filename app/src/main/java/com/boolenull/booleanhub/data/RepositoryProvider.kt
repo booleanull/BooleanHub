@@ -52,14 +52,14 @@ class RepositoryProvider(val presentor: RepositoryPresenter) {
         }
 
         val compositeDisposable = CompositeDisposable()
-        compositeDisposable.add(Observable.fromCallable {
+        /*compositeDisposable.add(Observable.fromCallable {
             repositoryDatabase.repositoryDao().deleteAll()
             repositoryDatabase.repositoryDao().insert(repositoryList)
         }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe()
-        )
+        )*/
 
         presentor.finishLoadOrUpdateRepository(repositoryList)
     }

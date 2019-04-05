@@ -1,6 +1,7 @@
 package com.boolenull.booleanhub.di
 
 import com.boolenull.booleanhub.data.ApiService
+import com.boolenull.booleanhub.utils.BASEURI
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -31,8 +32,8 @@ class NetworkModule {
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(rxJava2CallAdapterFactory)
             .addConverterFactory(gsonConverterFactory)
-            .baseUrl("https://api.github.com/")
-            .build();
+            .baseUrl(BASEURI)
+            .build()
         return retrofit.create(ApiService::class.java)
     }
 }

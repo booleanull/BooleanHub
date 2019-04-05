@@ -1,4 +1,4 @@
-package com.boolenull.booleanhub.utils;
+package com.boolenull.booleanhub.utils.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
