@@ -1,10 +1,7 @@
 package com.boolenull.booleanhub.data
 
 import android.arch.persistence.room.*
-import com.boolenull.booleanhub.model.RepositoryModel
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Maybe
+import com.boolenull.booleanhub.ui.model.RepositoryModel
 
 
 @Dao

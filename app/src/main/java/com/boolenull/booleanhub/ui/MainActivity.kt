@@ -1,12 +1,11 @@
-package com.boolenull.booleanhub
+package com.boolenull.booleanhub.ui
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.boolenull.booleanhub.fragment.BlogFragment
-import com.boolenull.booleanhub.fragment.LinkFragment
-import com.boolenull.booleanhub.fragment.RepositoryFragment
+import com.boolenull.booleanhub.R
+import com.boolenull.booleanhub.ui.adapter.PageAdapter
+import com.boolenull.booleanhub.ui.fragment.EnumFragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity() {
@@ -15,15 +14,15 @@ class MainActivity: AppCompatActivity() {
         BottomNavigationView.OnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_blog -> {
-                    setFragment(BlogFragment())
+                    viewPager.currentItem = BLOG.ordinal
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_repository -> {
-                    setFragment(LinkFragment())
+                    viewPager.currentItem = REPOSITORY.ordinal
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_aboutme -> {
-                    setFragment(RepositoryFragment())
+                    viewPager.currentItem = LINK.ordinal
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -33,14 +32,8 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewPager.adapter = PageAdapter(supportFragmentManager)
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-    }
-
-    private fun setFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.content, fragment)
-            .commit()
     }
 }
 

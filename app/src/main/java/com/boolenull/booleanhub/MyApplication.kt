@@ -8,7 +8,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        providerComponent = DaggerProviderComponent.builder()
+        applicationComponent = DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
             .networkModule(NetworkModule())
             .databaseModule(DatabaseModule())
@@ -16,6 +16,6 @@ class MyApplication : Application() {
     }
 
     companion object {
-        lateinit var providerComponent: ProviderComponent
+        lateinit var applicationComponent: ApplicationComponent
     }
 }

@@ -1,4 +1,4 @@
-package com.boolenull.booleanhub.adapter
+package com.boolenull.booleanhub.ui.adapter
 
 import android.content.Intent
 import android.net.Uri
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.boolenull.booleanhub.R
-import com.boolenull.booleanhub.model.RepositoryModel
+import com.boolenull.booleanhub.ui.model.RepositoryModel
 import kotlinx.android.synthetic.main.layout_repository.view.*
 
 class RepositoryAdapter: RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
@@ -16,12 +16,12 @@ class RepositoryAdapter: RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
     private var searchList = mutableListOf<RepositoryModel>()
     private lateinit var inflater: LayoutInflater
 
-    fun updateRepositoryList(list: MutableList<RepositoryModel>) {
+    fun updateRepositoryList(repositories: List<RepositoryModel>) {
         repositoryList.clear()
         searchList.clear()
 
-        repositoryList.addAll(list)
-        searchList.addAll(list)
+        repositoryList.addAll(repositories)
+        searchList.addAll(repositories)
 
         notifyDataSetChanged()
     }

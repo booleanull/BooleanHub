@@ -3,8 +3,8 @@ package com.boolenull.booleanhub.data
 import android.content.Context
 import com.boolenull.booleanhub.MyApplication
 import com.boolenull.booleanhub.R
-import com.boolenull.booleanhub.model.RepositoryModel
-import com.boolenull.booleanhub.presenter.RepositoryPresenter
+import com.boolenull.booleanhub.ui.model.RepositoryModel
+import com.boolenull.booleanhub.ui.presenter.RepositoryPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -23,7 +23,7 @@ class RepositoryProvider(val presentor: RepositoryPresenter) {
     var repositoryList = mutableListOf<RepositoryModel>()
 
     init {
-        MyApplication.providerComponent.inject(this)
+        MyApplication.applicationComponent.inject(this)
     }
 
     fun loadRepository() {
