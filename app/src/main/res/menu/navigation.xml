@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_blog"
+        android:icon="@drawable/ic_format_align_left_black_24dp"
+        android:title="@string/blog"/>
+
+    <item
+        android:id="@+id/navigation_repository"
+        android:icon="@drawable/ic_code_black_24dp"
+        android:title="@string/repository"/>
+
+    <item
+        android:id="@+id/navigation_aboutme"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/aboutme"/>
+
+</menu>
