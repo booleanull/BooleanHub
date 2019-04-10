@@ -17,7 +17,7 @@
         android:background="@color/colorWhite"
         android:orientation="horizontal">
 
-        <com.boolenull.booleanhub.utils.VerticalTextView
+        <com.boolenull.booleanhub.utils.view.VerticalTextView
             android:id="@+id/tvLanguage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

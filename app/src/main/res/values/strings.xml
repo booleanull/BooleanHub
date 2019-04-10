@@ -3,10 +3,16 @@
     <string name="answerfromservererror">Ошибка! Не удалось получить ответ от сервера.</string>
     <string name="listempty">Список пуст</string>
     <string name="Search">Search</string>
-    <string name="createdate">Дата создания: </string>
-    <string name="updatedate">Последнее обновление: </string>
+    <string name="createdate">Дата создания:</string>
+    <string name="updatedate">Последнее обновление:</string>
     <string name="today">Коммитов сегодня:</string>
     <string name="yesterday">Коммитов вчера:</string>
     <string name="nointernet">Отсутствует подключение!</string>
     <string name="booleanull">BooleaNull</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="blog">Blog</string>
+    <string name="repository">Repository</string>
+    <string name="aboutme">About me</string>
 </resources>

@@ -1,35 +1,61 @@
-package com.boolenull.booleanhub.activity
+package com.boolenull.booleanhub.ui
 
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.SearchView
-import android.text.TextUtils
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
+import android.support.design.widget.BottomNavigationView
+import android.support.v7.app.AppCompatActivity
 import com.boolenull.booleanhub.R
-import com.boolenull.booleanhub.adapter.RepositoryAdapter
-import com.boolenull.booleanhub.model.RepositoryModel
-import com.boolenull.booleanhub.presenter.RepositoryPresenter
-import com.boolenull.booleanhub.view.RepositoryView
+import com.boolenull.booleanhub.ui.adapter.PageAdapter
+import com.boolenull.booleanhub.ui.fragment.EnumFragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 
+class MainActivity: AppCompatActivity() {
 
-class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryTextListener,
-        SwipeRefreshLayout.OnRefreshListener {
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_blog -> {
+                    viewPager.currentItem = BLOG.ordinal
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_repository -> {
+                    viewPager.currentItem = REPOSITORY.ordinal
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_aboutme -> {
+                    viewPager.currentItem = LINK.ordinal
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        viewPager.adapter = PageAdapter(supportFragmentManager)
+        navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+}
+
+/*class MainActivity : MvpAppCompatActivity(), RepositoryView {
 
     @InjectPresenter
     lateinit var repositoryPresenter: RepositoryPresenter
 
     lateinit var repositoryAdapter: RepositoryAdapter
     lateinit var searchView: SearchView
-    lateinit var menuItem: MenuItem
+    var menuItem: MenuItem? = null
     var searchString: String = ""
+
+    private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
+        repositoryPresenter.startLoadOrUpdateRepository(true)
+    }
+
+    private val queryTextListener = MyOnQueryTextListener {
+        //repositoryPresenter.viewState.setRepositorySearch(it)
+        Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,38 +64,24 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
         repositoryAdapter = RepositoryAdapter()
         recyclerView.adapter = repositoryAdapter
         recyclerView.layoutManager = LinearLayoutManager(applicationContext, OrientationHelper.VERTICAL, false)
-        //recyclerView.addItemDecoration(SpacesItemDecoration(this, 8))
         recyclerView.setHasFixedSize(true)
 
-        swipeRefreshLayout.setOnRefreshListener(this)
+        swipeRefreshLayout.setOnRefreshListener(refreshListener)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_repository, menu)
-        menuItem = menu!!.findItem(R.id.action_search)
-        searchView = menuItem.actionView as SearchView
-        searchView.setOnQueryTextListener(this)
+        menuItem = menu?.findItem(R.id.action_search)
+        searchView = menuItem?.actionView as SearchView
+        searchView.setOnQueryTextListener(queryTextListener)
 
         if (!TextUtils.isEmpty(searchString)) {
-            menuItem.expandActionView();
-            searchView.setQuery(searchString, true);
+            menuItem?.expandActionView()
+            searchView.setQuery(searchString, true)
             searchView.isIconified = false
         }
 
         return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
-    }
-
-    override fun onQueryTextChange(text: String?): Boolean {
-        repositoryPresenter.viewState.setRepositorySearch(text!!)
-        return true
-    }
-
-    override fun onRefresh() {
-        repositoryPresenter.startLoadOrUpdateRepository(true)
     }
 
     override fun setRepositorySearch(text: String) {
@@ -115,4 +127,4 @@ class MainActivity : MvpAppCompatActivity(), RepositoryView, SearchView.OnQueryT
     override fun hideEmpty() {
         tvEmpty.visibility = View.GONE
     }
-}
+}*/
