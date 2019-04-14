@@ -29,11 +29,31 @@
             android:textSize="16sp"
             android:visibility="gone" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/layout_repository" />
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/layout_repository" />
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPurple"
+                android:gravity="center"
+                android:text="@string/errornetwork"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
     </FrameLayout>
 

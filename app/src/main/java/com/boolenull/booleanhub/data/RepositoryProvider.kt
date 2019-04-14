@@ -3,6 +3,7 @@ package com.boolenull.booleanhub.data
 import android.content.Context
 import com.boolenull.booleanhub.MyApplication
 import com.boolenull.booleanhub.R
+import com.boolenull.booleanhub.data.database.RepositoryDatabase
 import com.boolenull.booleanhub.ui.model.RepositoryModel
 import com.boolenull.booleanhub.ui.presenter.RepositoryPresenter
 import io.reactivex.Observable
@@ -73,7 +74,7 @@ class RepositoryProvider(val presentor: RepositoryPresenter) {
                 .subscribeOn(Schedulers.io())
                 .subscribe {
                     repositoryList.reversed()
-                    presentor.errorLoadOrUpdateRepository(repositoryList, R.string.answerfromservererror)
+                    presentor.errorLoadOrUpdateRepository(repositoryList)
                 }
         )
     }

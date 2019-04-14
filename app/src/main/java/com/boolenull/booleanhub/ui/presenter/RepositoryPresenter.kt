@@ -19,11 +19,11 @@ class RepositoryPresenter : MvpPresenter<RepositoryView>() {
         RepositoryProvider(this).loadRepository()
     }
 
-    fun errorLoadOrUpdateRepository(repositories: List<RepositoryModel>, rid: Int) {
+    fun errorLoadOrUpdateRepository(repositories: List<RepositoryModel>) {
         viewState.endProgress()
         viewState.showEmpty()
         viewState.setRepositoryList(repositories)
-        viewState.showError(rid)
+        viewState.showNetworkError()
     }
 
     fun finishLoadOrUpdateRepository(repositories: List<RepositoryModel>) {

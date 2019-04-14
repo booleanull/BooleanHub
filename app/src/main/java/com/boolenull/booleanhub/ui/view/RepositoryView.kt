@@ -11,16 +11,18 @@ interface RepositoryView: MvpView {
 
     fun setRepositoryList(repositories: List<RepositoryModel>)
 
-    fun setRepositorySearch(text: String)
-
     fun showProgress(isRefresh: Boolean)
 
     fun endProgress()
 
-    @StateStrategyType(SkipStrategy::class)
-    fun showError(rid: Int)
-
     fun showEmpty()
 
     fun hideEmpty()
+
+    fun showNetworkError()
+
+    fun hideNetworkError()
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showError(rid: Int)
 }

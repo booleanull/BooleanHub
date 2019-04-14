@@ -2,8 +2,7 @@ package com.boolenull.booleanhub.di
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import com.boolenull.booleanhub.MyApplication
-import com.boolenull.booleanhub.data.RepositoryDatabase
+import com.boolenull.booleanhub.data.database.RepositoryDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
